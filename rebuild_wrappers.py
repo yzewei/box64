@@ -410,6 +410,14 @@ def readFiles(files: Iterable[Filename]) -> Tuple[JumbledGlobals, JumbledRedirec
 							 or match("libegl", "glesv2") \
 							 or match("libegl", "libglxnvidia") \
 							 or match("glesv2", "libglxnvidia") \
+							 or match("libtinfo", "libncurses") \
+							 or match("libtinfo", "libncursesw") \
+							 or match("libtinfo", "libncurses6") \
+							 or match("libtinfo", "libncursesw6") \
+							 or match("libtinfo6", "libncurses") \
+							 or match("libtinfo6", "libncursesw") \
+							 or match("libtinfo6", "libncurses6") \
+							 or match("libtinfo6", "libncursesw6") \
 							 or match("softokn3", "p11kit") \
 							 or match("libc", "tcmallocminimal") \
 							 or match("libc", "tbbmallocproxy") \

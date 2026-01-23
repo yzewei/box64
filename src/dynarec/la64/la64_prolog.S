@@ -64,7 +64,8 @@ la64_prolog:
     ldptr.d   $r19, $r19, 0
     andi      $r19, $r19, 1
     beqz      $r19, 1f
-    x86mtflag Flags, 0b111111
+    .word     0x005cfc3f
+    //x86mtflag Flags, 0b111111
 1:
     // push sentinel onto the stack
     st.d   $r0,  $sp, -16

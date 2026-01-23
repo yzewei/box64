@@ -61,6 +61,7 @@ int get_cpuMhz()
         }
     }
 #ifndef STATICBUILD
+#if 0
     if(!MHz) {
         // try with lscpu, grabbing the max frequency
         FILE* f = popen("lscpu | grep \"CPU max MHz:\" | sed -r 's/CPU max MHz:\\s{1,}//g'", "r");
@@ -89,6 +90,7 @@ int get_cpuMhz()
             }
         }
     }
+#endif
     #endif
     if(!MHz)
         MHz = 1500; // default to 1.5Ghz...
@@ -167,7 +169,9 @@ const char* getCpuName()
     }
     setenv("BOX64_CPUNAME", name, 1);   // temporary set
     #ifndef STATICBUILD
-    FILE* f = popen("LC_ALL=C lscpu | grep -i \"model name:\" | head -n 1 | sed -r 's/(model name:)\\s{1,}//gi'", "r");
+    FILE* f = NULL;
+#if 0
+    f = popen("LC_ALL=C lscpu | grep -i \"model name:\" | head -n 1 | sed -r 's/(model name:)\\s{1,}//gi'", "r");
     if(f) {
         char tmp[200] = "";
         ssize_t s = fread(tmp, 1, 200, f);
@@ -184,6 +188,7 @@ const char* getCpuName()
             return name;
         }
     }
+#endif
     // failed, try to get architecture at least
     f = popen("uname -m", "r");
     if(f) {

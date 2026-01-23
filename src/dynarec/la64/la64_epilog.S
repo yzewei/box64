@@ -38,7 +38,8 @@ la64_epilog:
     beqz      $r19, 1f
     ori       $r19, $r0, 0b100011010101
     andn      Flags, Flags, $r19
-    x86mfflag $r19, 0b111111
+    .word     0x005cfc0d
+    //x86mfflag $r19, 0b111111
     or        Flags, Flags, $r19
 1:
     st.d   Flags, Emu, (8 * 16) // xFlags

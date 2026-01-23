@@ -81,6 +81,8 @@ static inline uint64_t readFreq()
 {
     static size_t val = -1;
 
+    // Avoid spawning shell pipelines (heavy under binfmt); fallback to rdtime+sleep.
+    #if 0
     FILE* f = popen("cat /proc/cpuinfo | grep -i \"CPU MHz\" | head -n 1 | sed -r 's/CPU MHz.+:\\s{1,}//g'", "r");
     if(f) {
         char tmp[200] = "";
@@ -88,6 +90,7 @@ static inline uint64_t readFreq()
         pclose(f);
         if (s > 0) return (uint64_t)atof(tmp) * 1e6;
     }
+    #endif
 
     // fallback to rdtime + sleep
     struct timespec ts;
